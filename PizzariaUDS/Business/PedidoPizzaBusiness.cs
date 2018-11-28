@@ -12,7 +12,9 @@ namespace PizzariaUDS.Business
         private TamanhoRepository _tamanhoRepository;
 
 
-        public PedidoPizzaBusiness(PizzaRepository pizzaRepository, SaborRepository saborRepository, TamanhoRepository tamanhoRepository)
+        public PedidoPizzaBusiness(PizzaRepository pizzaRepository, 
+                                   SaborRepository saborRepository, 
+                                   TamanhoRepository tamanhoRepository)
         {
             _pizzaRepository = pizzaRepository;
             _saborRepository = saborRepository;
@@ -23,7 +25,7 @@ namespace PizzariaUDS.Business
         {
             ValidarPedido(pedido);
             var pizza = SalvarPedido(pedido);
-            return new Pedido { MinutosParaProduzir = 15 };
+            return new Pedido { TempoDePreparo = 15 }; 
         }
 
         private Pizza SalvarPedido(PedidoDTO pedido)
@@ -36,9 +38,9 @@ namespace PizzariaUDS.Business
         private void ValidarPedido(PedidoDTO pedido)
         {
             if (pedido.SaborId.Equals(0))
-                throw new BusinessExcpetion("O código do sabor é obrigatório.");
+                throw new BusinessExcpetion("É necessário informar o sabor da pizza para realizar o pedido.");
             if (pedido.TamanhoId.Equals(0))
-                throw new BusinessExcpetion("O código do tamaho é obrigatório.");
+                throw new BusinessExcpetion("É necessário informar o tamanho da pizza para realizar o pedido.");
         }
 
     }

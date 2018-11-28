@@ -8,6 +8,8 @@ namespace PizzariaUDS.Context
         public DbSet<Sabor> Sabores { get; set; }
         public DbSet<Tamanho> Tamanhos { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<Personalizacao> Personalizacoes { get; set; }
+        
 
         public PizzaContext(DbContextOptions<PizzaContext> options) : base(options)
         { }

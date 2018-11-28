@@ -27,6 +27,7 @@ namespace PizzariaUDS
             services.AddScoped<SaborRepository>();
             services.AddScoped<TamanhoRepository>();
             services.AddScoped<PizzaRepository>();
+            services.AddScoped<PersonalizacaoRepository>();
             services.AddScoped<PedidoPizzaBusiness>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -58,7 +59,8 @@ namespace PizzariaUDS
             // carga inicial de dados
             var context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<PizzaContext>();
             new SaborRepository(context).SetarSabores();
-            new TamanhoRepository(context).SetTamanhos();
+            new TamanhoRepository(context).SetarTamanhos();
+            new PersonalizacaoRepository(context).SetarPersonalizacoes();
         }
     }
 }

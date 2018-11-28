@@ -2,9 +2,9 @@
 
 namespace PizzariaUDS.Models
 {
-    public class Sabor : ItemPizza
+    public class Personalizacao : ItemPizza
     {
         [Key]
-        public int SaborId { get; set; }
+        public int PersonalizacaoId { get; set; }
     }
 }

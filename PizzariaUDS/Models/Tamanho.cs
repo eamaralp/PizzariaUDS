@@ -2,12 +2,9 @@
 
 namespace PizzariaUDS.Models
 {
-    public class Tamanho
+    public class Tamanho : ItemPizza
     {
         [Key]
         public int TamanhoId { get; set; }
-        public string Descricao { get; set; }
-        public decimal Valor { get; set; }
-        public int MinutosParaProduzir { get; set; }
     }
 }

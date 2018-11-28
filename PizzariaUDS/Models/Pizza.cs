@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PizzariaUDS.Models
 {
@@ -10,5 +11,6 @@ namespace PizzariaUDS.Models
         public Tamanho Tamanho { get; set; }
         [Required]
         public Sabor Sabor { get; set; }
+        public IEnumerable<Personalizacao> Personalizacoes { get; set; }
     }
 }

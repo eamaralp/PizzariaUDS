@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PizzariaUDS.Business;
-using PizzariaUDS.DTO;
 using PizzariaUDS.Models;
 using PizzariaUDS.Repository;
 using System.Collections.Generic;
@@ -13,13 +11,13 @@ namespace PizzariaUDS.Controllers
     {
         private SaborRepository _saborRepository;
         private TamanhoRepository _tamanhoRepository;
-        private PedidoPizzaBusiness _pedidoPizzaBusines;
+        private PersonalizacaoRepository _personalizacaoRepository;
 
-        public PizzaController(SaborRepository saborRepository, TamanhoRepository tamanhoRepository, PedidoPizzaBusiness pedidoPizzaBusines)
+        public PizzaController(SaborRepository saborRepository, TamanhoRepository tamanhoRepository, PersonalizacaoRepository personalizacaoRepository)
         {
             _saborRepository = saborRepository;
             _tamanhoRepository = tamanhoRepository;
-            _pedidoPizzaBusines = pedidoPizzaBusines;
+            _personalizacaoRepository = personalizacaoRepository;
         }
 
         [Route("Tamanhos")]
@@ -36,12 +34,11 @@ namespace PizzariaUDS.Controllers
             return _saborRepository.ObterSabores();
         }
 
-        [Route("montar")]
-        [HttpPost]
-        public Pedido MontarPedido([FromBody] PedidoDTO pedido)
+        [Route("Personalizacoes")]
+        [HttpGet]
+        public IEnumerable<Personalizacao> ObterPersonalizacoes()
         {
-            return _pedidoPizzaBusines.MontarPedido(pedido);
+            return _personalizacaoRepository.ObterPersonalizacoes();
         }
-
     }
 }

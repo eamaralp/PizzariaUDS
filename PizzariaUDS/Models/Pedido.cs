@@ -3,7 +3,7 @@
     public class Pedido
     {
         public Pizza Pizza { get; set; }
-        public decimal Valor { get; set; }
-        public int MinutosParaProduzir { get; set; }
+        public decimal ValorTotal { get; set; }
+        public int TempoDePreparo { get; set; }
     }
 }

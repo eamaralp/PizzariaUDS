@@ -21,7 +21,7 @@ namespace PizzariaUDS.Repository
             yield return new Tamanho { Descricao = "Grande", Valor = 40.00M, MinutosParaProduzir = 25 };
         }
 
-        public void SetTamanhos()
+        public void SetarTamanhos()
         {
             foreach (var tamanho in ListaTamanhos())
             {
