@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using PizzariaUDS.Business;
+using PizzariaUDS.Context;
+using PizzariaUDS.Exceptions;
+using PizzariaUDS.Repository;
 
 namespace PizzariaUDS
 {
@@ -26,6 +24,15 @@ namespace PizzariaUDS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(config =>
+            {
+                config.Filters.Add(typeof(PizzriaUDSCustomExceptionFilter));
+            });
+            services.AddDbContext<PizzaContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
+            services.AddScoped<SaborRepository>();
+            services.AddScoped<TamanhoRepository>();
+            services.AddScoped<PizzaRepository>();
+            services.AddScoped<PedidoPizzaBusiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +48,11 @@ namespace PizzariaUDS
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }
