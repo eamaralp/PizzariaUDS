@@ -32,7 +32,6 @@ namespace PizzariaUDS.Repository
 
         public IEnumerable<Sabor> ObterSabores()
         {
-            SetarSabores();
             var sabores = _context.Sabores.ToList();
             return sabores;
         }

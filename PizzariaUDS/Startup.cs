@@ -23,16 +23,17 @@ namespace PizzariaUDS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMvc(config =>
-            {
-                config.Filters.Add(typeof(PizzriaUDSCustomExceptionFilter));
-            });
             services.AddDbContext<PizzaContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
             services.AddScoped<SaborRepository>();
             services.AddScoped<TamanhoRepository>();
             services.AddScoped<PizzaRepository>();
             services.AddScoped<PedidoPizzaBusiness>();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(config =>
+            {
+                config.Filters.Add(typeof(PizzriaUDSCustomExceptionFilter));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +54,11 @@ namespace PizzariaUDS
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
+
+            // carga inicial de dados
+            var context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<PizzaContext>();
+            new SaborRepository(context).SetarSabores();
+            new TamanhoRepository(context).SetTamanhos();
         }
     }
 }

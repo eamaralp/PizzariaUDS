@@ -32,7 +32,6 @@ namespace PizzariaUDS.Repository
 
         public IEnumerable<Tamanho> ObterTamanhos()
         {
-            SetTamanhos();
             var tamanhos = _context.Tamanhos.ToList();
             return tamanhos;
         }
