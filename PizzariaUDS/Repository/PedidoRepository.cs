@@ -3,21 +3,21 @@ using PizzariaUDS.Models;
 
 namespace PizzariaUDS.Repository
 {
-    public class PizzaRepository
+    public class PedidoRepository
     {
         private PizzariaContext _context;
 
-        public PizzaRepository(PizzariaContext context)
+        public PedidoRepository(PizzariaContext context)
         {
             _context = context;
         }
 
-        public Pizza SalvarPedido(Pizza pizza)
+        public Pedido SalvarPedido(Pedido pedido)
         {
-            _context.Pizzas.Add(pizza);
+            _context.Pedidos.Add(pedido);
             _context.SaveChanges();
 
-            return pizza;
+            return pedido;
         }
     }
 }

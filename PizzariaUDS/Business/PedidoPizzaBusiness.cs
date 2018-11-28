@@ -1,7 +1,7 @@
 ﻿using PizzariaUDS.DTO;
-using PizzariaUDS.Exceptions;
 using PizzariaUDS.Models;
 using PizzariaUDS.Repository;
+using System.Linq;
 
 namespace PizzariaUDS.Business
 {
@@ -10,37 +10,58 @@ namespace PizzariaUDS.Business
         private PizzaRepository _pizzaRepository;
         private SaborRepository _saborRepository;
         private TamanhoRepository _tamanhoRepository;
+        private PersonalizacaoRepository _personalizacaoRepository;
 
-
-        public PedidoPizzaBusiness(PizzaRepository pizzaRepository, 
-                                   SaborRepository saborRepository, 
-                                   TamanhoRepository tamanhoRepository)
+        public PedidoPizzaBusiness(PizzaRepository pizzaRepository,
+                                   SaborRepository saborRepository,
+                                   TamanhoRepository tamanhoRepository,
+                                   PersonalizacaoRepository personalizacaoRepository)
         {
             _pizzaRepository = pizzaRepository;
             _saborRepository = saborRepository;
             _tamanhoRepository = tamanhoRepository;
+            _personalizacaoRepository = personalizacaoRepository;
         }
 
-        public Pedido MontarPedido(PedidoDTO pedido)
+        public DetalhesPedidoDTO MontarPedido(PedidoDTO pedidoDto)
         {
-            ValidarPedido(pedido);
-            var pizza = SalvarPedido(pedido);
-            return new Pedido { TempoDePreparo = 15 }; 
+            new ValidadorPedido().ValidarPedido(pedidoDto);
+            var pedido = SalvarPedido(pedidoDto);
+            return new DetalhesPedidoDTO();
         }
 
-        private Pizza SalvarPedido(PedidoDTO pedido)
+        private Pedido SalvarPedido(PedidoDTO pedidoDto)
         {
-            var pizza = new Pizza() { Sabor = _saborRepository.ObterSaborPorId(pedido.SaborId),
-                                      Tamanho = _tamanhoRepository.ObterTamanhoPorId(pedido.TamanhoId) };
-            return _pizzaRepository.SalvarPedido(pizza);
+            var pizza = new PizzaBusiness().MontarPizza(pedidoDto);
+
+            CalcularValorTotalPedido(pizza);
+            CalcularTempoTotalProducao(pizza);
+
+            var pedido = new Pedido()
+            {
+                Pizza = pizza,
+                ValorTotal = CalcularValorTotalPedido(pizza),
+                TempoDePreparo = CalcularTempoTotalProducao(pizza)
+            };
+            return new Pedido();
         }
 
-        private void ValidarPedido(PedidoDTO pedido)
+        private static decimal CalcularValorTotalPedido(Pizza pizza)
         {
-            if (pedido.SaborId.Equals(0))
-                throw new BusinessExcpetion("É necessário informar o sabor da pizza para realizar o pedido.");
-            if (pedido.TamanhoId.Equals(0))
-                throw new BusinessExcpetion("É necessário informar o tamanho da pizza para realizar o pedido.");
+            var valorTotal = pizza.Sabor.Valor.GetValueOrDefault()
+                           + pizza.Tamanho.Valor.GetValueOrDefault()
+                           + pizza.Personalizacoes.Sum(x => x.Valor.GetValueOrDefault());
+
+            return valorTotal;
+        }
+
+        private static int CalcularTempoTotalProducao(Pizza pizza)
+        {
+            var tempoTotalProducao = pizza.Sabor.MinutosParaProduzir.GetValueOrDefault()
+                                   + pizza.Tamanho.MinutosParaProduzir.GetValueOrDefault()
+                                   + pizza.Personalizacoes.Sum(x => x.MinutosParaProduzir.GetValueOrDefault());
+
+            return tempoTotalProducao;
         }
 
     }

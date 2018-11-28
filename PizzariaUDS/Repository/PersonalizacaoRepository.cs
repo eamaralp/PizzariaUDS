@@ -7,9 +7,9 @@ namespace PizzariaUDS.Repository
 {
     public class PersonalizacaoRepository
     {
-        private PizzaContext _context;
+        private PizzariaContext _context;
 
-        public PersonalizacaoRepository(PizzaContext context)
+        public PersonalizacaoRepository(PizzariaContext context)
         {
             _context = context;
         }
@@ -35,5 +35,12 @@ namespace PizzariaUDS.Repository
             var personalizacoes = _context.Personalizacoes.ToList();
             return personalizacoes;
         }
+
+        public ICollection<Personalizacao> ObterPersonalizacoesPorId(IEnumerable<int> idsPersinalizacoes)
+        {
+            var personalizacoes = _context.Personalizacoes.Where(p => idsPersinalizacoes.Contains(p.PersonalizacaoId)).ToList();
+            return personalizacoes;
+        }
+
     }
 }

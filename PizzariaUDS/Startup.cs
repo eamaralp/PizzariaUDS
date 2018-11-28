@@ -23,7 +23,7 @@ namespace PizzariaUDS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PizzaContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
+            services.AddDbContext<PizzariaContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
             services.AddScoped<SaborRepository>();
             services.AddScoped<TamanhoRepository>();
             services.AddScoped<PizzaRepository>();
@@ -57,7 +57,7 @@ namespace PizzariaUDS
             });
 
             // carga inicial de dados
-            var context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<PizzaContext>();
+            var context = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<PizzariaContext>();
             new SaborRepository(context).SetarSabores();
             new TamanhoRepository(context).SetarTamanhos();
             new PersonalizacaoRepository(context).SetarPersonalizacoes();

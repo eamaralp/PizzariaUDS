@@ -11,6 +11,6 @@ namespace PizzariaUDS.Models
         public Tamanho Tamanho { get; set; }
         [Required]
         public Sabor Sabor { get; set; }
-        public IEnumerable<Personalizacao> Personalizacoes { get; set; }
+        public ICollection<Personalizacao> Personalizacoes { get; set; }
     }
 }
