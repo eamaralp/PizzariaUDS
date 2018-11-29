@@ -7,9 +7,9 @@ namespace PizzariaUDS.Repository
 {
     public class PersonalizacaoRepository : IPersonalizacaoRepository
     {
-        private PizzariaContext _context;
+        private IPizzariaContext _context;
 
-        public PersonalizacaoRepository(PizzariaContext context)
+        public PersonalizacaoRepository(IPizzariaContext context)
         {
             _context = context;
         }

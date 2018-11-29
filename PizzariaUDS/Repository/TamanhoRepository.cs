@@ -7,9 +7,9 @@ namespace PizzariaUDS.Repository
 {
     public class TamanhoRepository : ITamanhoRepository
     {
-        private PizzariaContext _context;
+        private IPizzariaContext _context;
 
-        public TamanhoRepository(PizzariaContext context)
+        public TamanhoRepository(IPizzariaContext context)
         {
             _context = context;
         }

@@ -3,7 +3,7 @@ using PizzariaUDS.Models;
 
 namespace PizzariaUDS.Context
 {
-    public class PizzariaContext : DbContext
+    public class PizzariaContext : DbContext, IPizzariaContext
     {
         public DbSet<Sabor> Sabores { get; set; }
         public DbSet<Tamanho> Tamanhos { get; set; }
