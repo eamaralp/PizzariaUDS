@@ -40,8 +40,7 @@ namespace PizzariaUDS.Business
                 }
             }
 
-            var pedido = SalvarPedido(pedidoDto);
-            return pedido;
+            return SalvarPedido(pedidoDto);
         }
 
         private Pedido SalvarPedido(PedidoDTO pedidoDto)
