@@ -23,7 +23,7 @@ namespace PizzariaUDS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<IPizzariaContext, PizzariaContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
+            services.AddDbContext<IPizzariaContext,PizzariaContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
             services.InjetarDependencias();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);

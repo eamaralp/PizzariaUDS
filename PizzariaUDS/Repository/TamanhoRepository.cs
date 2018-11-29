@@ -14,7 +14,7 @@ namespace PizzariaUDS.Repository
             _context = context;
         }
 
-        public static IEnumerable<ITamanhoProperties> ListaTamanhos()
+        public static IEnumerable<Tamanho> ListaTamanhos()
         {
             yield return new Tamanho { Descricao = "Pequena", Valor = 20.00M, MinutosParaProduzir = 15 };
             yield return new Tamanho { Descricao = "Média", Valor = 30.00M, MinutosParaProduzir = 20 };
@@ -25,7 +25,7 @@ namespace PizzariaUDS.Repository
         {
             foreach (var tamanho in ListaTamanhos())
             {
-                _context.Add(tamanho);
+                _context.Tamanhos.Add(tamanho);
             }
             _context.SaveChanges();
         }

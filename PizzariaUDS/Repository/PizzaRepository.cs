@@ -5,9 +5,9 @@ namespace PizzariaUDS.Repository
 {
     public class PizzaRepository : IPizzaRepository
     {
-        private PizzariaContext _context;
+        private IPizzariaContext _context;
 
-        public PizzaRepository(PizzariaContext context)
+        public PizzaRepository(IPizzariaContext context)
         {
             _context = context;
         }

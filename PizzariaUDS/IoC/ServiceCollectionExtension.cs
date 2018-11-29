@@ -16,7 +16,7 @@ namespace PizzariaUDS.IoC
         
         private static void InjetarRepositorios(IServiceCollection services)
         {
-            services.AddScoped<ISaborRepository,SaborRepository>();
+            services.AddScoped<ISaborRepository, SaborRepository>();
             services.AddScoped<ITamanhoRepository, TamanhoRepository>();
             services.AddScoped<IPizzaRepository, PizzaRepository>();
             services.AddScoped<IPersonalizacaoRepository, PersonalizacaoRepository>();
@@ -25,8 +25,8 @@ namespace PizzariaUDS.IoC
 
         private static void InjetarBusiness(IServiceCollection services)
         {
-            services.AddScoped<PedidoPizzaBusiness>();
-            services.AddScoped<PizzaBusiness>();
+            services.AddScoped<IPedidoPizzaBusiness, PedidoPizzaBusiness>();
+            services.AddScoped<IPizzaBusiness, PizzaBusiness>();
         }
     }
 }

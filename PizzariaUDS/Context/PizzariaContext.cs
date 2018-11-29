@@ -5,11 +5,11 @@ namespace PizzariaUDS.Context
 {
     public class PizzariaContext : DbContext, IPizzariaContext
     {
-        public DbSet<Sabor> Sabores { get; set; }
-        public DbSet<Tamanho> Tamanhos { get; set; }
-        public DbSet<Pizza> Pizzas { get; set; }
-        public DbSet<Personalizacao> Personalizacoes { get; set; }
-        public DbSet<Pedido> Pedidos { get; set; }
+        public virtual DbSet<Sabor> Sabores { get; set; }
+        public virtual DbSet<Tamanho> Tamanhos { get; set; }
+        public virtual DbSet<Pizza> Pizzas { get; set; }
+        public virtual DbSet<Personalizacao> Personalizacoes { get; set; }
+        public virtual DbSet<Pedido> Pedidos { get; set; }
 
         public PizzariaContext(DbContextOptions<PizzariaContext> options) : base(options)
         { }

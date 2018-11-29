@@ -11,13 +11,15 @@ namespace PizzariaUDSTests.Business
     public class PedidoPizzaBusinessTests
     {
         private IPedidoRepository _pedidoRepository;
-        private PizzaBusiness _pizzaBusiness;
+        private IPizzaBusiness _pizzaBusiness;
         private IPizzariaContext _pizzariaContext;
 
         [SetUp]
         public void SetUp()
         {
             _pedidoRepository = Substitute.For<IPedidoRepository>();
+            _pizzaBusiness = Substitute.For<IPizzaBusiness>();
+            _pizzariaContext = Substitute.For<IPizzariaContext>();
         }
 
         private PedidoPizzaBusiness ObterInstancia()

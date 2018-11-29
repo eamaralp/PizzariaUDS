@@ -8,13 +8,13 @@ using System.Transactions;
 
 namespace PizzariaUDS.Business
 {
-    public class PedidoPizzaBusiness
+    public class PedidoPizzaBusiness : IPedidoPizzaBusiness
     {
         private IPedidoRepository _pedidoRepository;
-        private PizzaBusiness _pizzaBusiness;
+        private IPizzaBusiness _pizzaBusiness;
         private IPizzariaContext _pizzariaContext;
 
-        public PedidoPizzaBusiness(IPedidoRepository pedidoRepository, PizzaBusiness pizzaBusiness, IPizzariaContext pizzariaContext)
+        public PedidoPizzaBusiness(IPedidoRepository pedidoRepository, IPizzaBusiness pizzaBusiness, IPizzariaContext pizzariaContext)
         {
             _pedidoRepository = pedidoRepository;
             _pizzaBusiness = pizzaBusiness;
@@ -52,7 +52,7 @@ namespace PizzariaUDS.Business
 
             var pedido = new Pedido()
             {
-                Pizza = pizza,
+                Pizza = pizza as Pizza,
                 ValorTotal = CalcularValorTotalPedido(pizza),
                 TempoDePreparo = CalcularTempoTotalProducao(pizza)
             };
@@ -62,7 +62,7 @@ namespace PizzariaUDS.Business
             return pedido;
         }
 
-        private static decimal CalcularValorTotalPedido(Pizza pizza)
+        private static decimal CalcularValorTotalPedido(IPizzaProperties pizza)
         {
             var valorTotal = pizza.Sabor.Valor.GetValueOrDefault()
                            + pizza.Tamanho.Valor.GetValueOrDefault()
@@ -71,7 +71,7 @@ namespace PizzariaUDS.Business
             return valorTotal;
         }
 
-        private static int CalcularTempoTotalProducao(Pizza pizza)
+        private static int CalcularTempoTotalProducao(IPizzaProperties pizza)
         {
             var tempoTotalProducao = pizza.Sabor.MinutosParaProduzir.GetValueOrDefault()
                                    + pizza.Tamanho.MinutosParaProduzir.GetValueOrDefault()

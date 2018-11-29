@@ -25,7 +25,7 @@ namespace PizzariaUDS.Repository
         {
             foreach (var personalizacao in ListaPersonalizacoes())
             {
-                _context.Add(personalizacao);
+                _context.Personalizacoes.Add(personalizacao);
             }
             _context.SaveChanges();
         }

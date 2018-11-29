@@ -9,9 +9,9 @@ namespace PizzariaUDS.Controllers
     [ApiController]
     public class PedidoController : ControllerBase
     {
-        private PedidoPizzaBusiness _pedidoPizzaBusiness;
+        private IPedidoPizzaBusiness _pedidoPizzaBusiness;
 
-        public PedidoController(PedidoPizzaBusiness pedidoPizzaBusiness)
+        public PedidoController(IPedidoPizzaBusiness pedidoPizzaBusiness)
         {
             _pedidoPizzaBusiness = pedidoPizzaBusiness;
         }

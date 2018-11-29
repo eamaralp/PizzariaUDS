@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PizzariaUDS.Business
 {
-    public class PizzaBusiness
+    public class PizzaBusiness : IPizzaBusiness
     {
         private IPizzaRepository _pizzaRepository;
         private ISaborRepository _saborRepository;
@@ -23,7 +23,7 @@ namespace PizzariaUDS.Business
             _personalizacaoRepository = personalizacaoRepository;
         }
 
-        public Pizza MontarPizza(PedidoDTO pedido)
+        public IPizzaProperties MontarPizza(PedidoDTO pedido)
         {
             var sabor = _saborRepository.ObterSaborPorId(pedido.SaborId);
             var tamanho = _tamanhoRepository.ObterTamanhoPorId(pedido.TamanhoId);

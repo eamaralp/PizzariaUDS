@@ -25,7 +25,7 @@ namespace PizzariaUDS.Repository
         {
             foreach (var sabor in ListaSabores())
             {
-                _context.Add(sabor);
+                _context.Sabores.Add(sabor);
             }
             _context.SaveChanges();
         }
