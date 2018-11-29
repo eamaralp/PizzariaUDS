@@ -2,7 +2,7 @@
 
 namespace PizzariaUDS.Models
 {
-    public class Pedido
+    public class Pedido : IPedidoProperties
     {
         [Key]
         public int PedidoId { get; set; }

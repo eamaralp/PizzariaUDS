@@ -22,6 +22,8 @@ namespace PizzariaUDS.Context
                 .HasKey(t => t.TamanhoId);
             modelBuilder.Entity<Pizza>()
                 .HasKey(p => p.PizzaId);
+            modelBuilder.Entity<Personalizacao>()
+                .HasKey(p => p.PersonalizacaoId);
             modelBuilder.Entity<Pedido>()
                 .HasKey(p => p.PedidoId);
         }

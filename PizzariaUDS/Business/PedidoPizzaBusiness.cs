@@ -10,11 +10,11 @@ namespace PizzariaUDS.Business
 {
     public class PedidoPizzaBusiness
     {
-        private PedidoRepository _pedidoRepository;
+        private IPedidoRepository _pedidoRepository;
         private PizzaBusiness _pizzaBusiness;
         private PizzariaContext _pizzariaContext;
 
-        public PedidoPizzaBusiness(PedidoRepository pedidoRepository, PizzaBusiness pizzaBusiness, PizzariaContext pizzariaContext)
+        public PedidoPizzaBusiness(IPedidoRepository pedidoRepository, PizzaBusiness pizzaBusiness, PizzariaContext pizzariaContext)
         {
             _pedidoRepository = pedidoRepository;
             _pizzaBusiness = pizzaBusiness;

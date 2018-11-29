@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PizzariaUDS.Repository
 {
-    public class PersonalizacaoRepository
+    public class PersonalizacaoRepository : IPersonalizacaoRepository
     {
         private PizzariaContext _context;
 
@@ -30,13 +30,13 @@ namespace PizzariaUDS.Repository
             _context.SaveChanges();
         }
 
-        public IEnumerable<Personalizacao> ObterPersonalizacoes()
+        public IEnumerable<IPersonalizacaoProperties> ObterPersonalizacoes()
         {
             var personalizacoes = _context.Personalizacoes.ToList();
             return personalizacoes;
         }
 
-        public ICollection<Personalizacao> ObterPersonalizacoesPorId(IEnumerable<int> idsPersinalizacoes)
+        public IEnumerable<IPersonalizacaoProperties> ObterPersonalizacoesPorId(IEnumerable<int> idsPersinalizacoes)
         {
             var personalizacoes = _context.Personalizacoes.Where(p => idsPersinalizacoes.Contains(p.PersonalizacaoId)).ToList();
             return personalizacoes;

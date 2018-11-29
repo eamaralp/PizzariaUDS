@@ -3,7 +3,7 @@ using PizzariaUDS.Models;
 
 namespace PizzariaUDS.Repository
 {
-    public class PizzaRepository
+    public class PizzaRepository : IPizzaRepository
     {
         private PizzariaContext _context;
 

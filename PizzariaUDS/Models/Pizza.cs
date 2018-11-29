@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PizzariaUDS.Models
 {
-    public class Pizza
+    public class Pizza : IPizzaProperties
     {
         [Key]
         public int PizzaId { get; set; }
@@ -11,6 +11,6 @@ namespace PizzariaUDS.Models
         public Tamanho Tamanho { get; set; }
         [Required]
         public Sabor Sabor { get; set; }
-        public ICollection<Personalizacao> Personalizacoes { get; set; }
+        public IEnumerable<Personalizacao> Personalizacoes { get; set; }
     }
 }

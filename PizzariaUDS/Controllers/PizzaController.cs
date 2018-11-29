@@ -9,11 +9,11 @@ namespace PizzariaUDS.Controllers
     [ApiController]
     public class PizzaController : ControllerBase
     {
-        private SaborRepository _saborRepository;
-        private TamanhoRepository _tamanhoRepository;
-        private PersonalizacaoRepository _personalizacaoRepository;
+        private ISaborRepository _saborRepository;
+        private ITamanhoRepository _tamanhoRepository;
+        private IPersonalizacaoRepository _personalizacaoRepository;
 
-        public PizzaController(SaborRepository saborRepository, TamanhoRepository tamanhoRepository, PersonalizacaoRepository personalizacaoRepository)
+        public PizzaController(ISaborRepository saborRepository, ITamanhoRepository tamanhoRepository, IPersonalizacaoRepository personalizacaoRepository)
         {
             _saborRepository = saborRepository;
             _tamanhoRepository = tamanhoRepository;
@@ -22,21 +22,21 @@ namespace PizzariaUDS.Controllers
 
         [Route("Tamanhos")]
         [HttpGet]
-        public IEnumerable<Tamanho> ObterTamanhos()
+        public IEnumerable<ITamanhoProperties> ObterTamanhos()
         {
             return _tamanhoRepository.ObterTamanhos();
         }
 
         [Route("Sabores")]
         [HttpGet]
-        public IEnumerable<Sabor> ObterSabores()
+        public IEnumerable<ISaborProperties> ObterSabores()
         {
             return _saborRepository.ObterSabores();
         }
 
         [Route("Personalizacoes")]
         [HttpGet]
-        public IEnumerable<Personalizacao> ObterPersonalizacoes()
+        public IEnumerable<IPersonalizacaoProperties> ObterPersonalizacoes()
         {
             return _personalizacaoRepository.ObterPersonalizacoes();
         }

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PizzariaUDS.Repository
 {
-    public class TamanhoRepository
+    public class TamanhoRepository : ITamanhoRepository
     {
         private PizzariaContext _context;
 
@@ -14,7 +14,7 @@ namespace PizzariaUDS.Repository
             _context = context;
         }
 
-        public static IEnumerable<Tamanho> ListaTamanhos()
+        public static IEnumerable<ITamanhoProperties> ListaTamanhos()
         {
             yield return new Tamanho { Descricao = "Pequena", Valor = 20.00M, MinutosParaProduzir = 15 };
             yield return new Tamanho { Descricao = "Média", Valor = 30.00M, MinutosParaProduzir = 20 };
@@ -30,13 +30,13 @@ namespace PizzariaUDS.Repository
             _context.SaveChanges();
         }
 
-        public IEnumerable<Tamanho> ObterTamanhos()
+        public IEnumerable<ITamanhoProperties> ObterTamanhos()
         {
             var tamanhos = _context.Tamanhos.ToList();
             return tamanhos;
         }
 
-        public Tamanho ObterTamanhoPorId(int idTamanho)
+        public ITamanhoProperties ObterTamanhoPorId(int idTamanho)
         {
             return _context.Tamanhos.FirstOrDefault(s => s.TamanhoId == idTamanho);
         }

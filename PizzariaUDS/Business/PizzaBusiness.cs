@@ -1,20 +1,21 @@
 ﻿using PizzariaUDS.DTO;
 using PizzariaUDS.Models;
 using PizzariaUDS.Repository;
+using System.Collections.Generic;
 
 namespace PizzariaUDS.Business
 {
     public class PizzaBusiness
     {
-        private PizzaRepository _pizzaRepository;
-        private SaborRepository _saborRepository;
-        private TamanhoRepository _tamanhoRepository;
-        private PersonalizacaoRepository _personalizacaoRepository;
+        private IPizzaRepository _pizzaRepository;
+        private ISaborRepository _saborRepository;
+        private ITamanhoRepository _tamanhoRepository;
+        private IPersonalizacaoRepository _personalizacaoRepository;
 
-        public PizzaBusiness(PizzaRepository pizzaRepository,
-                             SaborRepository saborRepository,
-                             TamanhoRepository tamanhoRepository,
-                             PersonalizacaoRepository personalizacaoRepository)
+        public PizzaBusiness(IPizzaRepository pizzaRepository,
+                             ISaborRepository saborRepository,
+                             ITamanhoRepository tamanhoRepository,
+                             IPersonalizacaoRepository personalizacaoRepository)
         {
             _pizzaRepository = pizzaRepository;
             _saborRepository = saborRepository;
@@ -30,9 +31,9 @@ namespace PizzariaUDS.Business
 
             var pizza = new Pizza()
             {
-                Sabor = sabor,
-                Tamanho = tamanho,
-                Personalizacoes = presonalizacoes
+                Sabor = sabor as Sabor,
+                Tamanho = tamanho as Tamanho,
+                Personalizacoes = presonalizacoes as IEnumerable<Personalizacao>
             };
 
             _pizzaRepository.SalvarPedido(pizza);

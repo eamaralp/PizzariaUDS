@@ -16,11 +16,11 @@ namespace PizzariaUDS.IoC
         
         private static void InjetarRepositorios(IServiceCollection services)
         {
-            services.AddScoped<SaborRepository>();
-            services.AddScoped<TamanhoRepository>();
-            services.AddScoped<PizzaRepository>();
-            services.AddScoped<PersonalizacaoRepository>();
-            services.AddScoped<PedidoRepository>();
+            services.AddScoped<ISaborRepository,SaborRepository>();
+            services.AddScoped<ITamanhoRepository, TamanhoRepository>();
+            services.AddScoped<IPizzaRepository, PizzaRepository>();
+            services.AddScoped<IPersonalizacaoRepository, PersonalizacaoRepository>();
+            services.AddScoped<IPedidoRepository, PedidoRepository>();
         }
 
         private static void InjetarBusiness(IServiceCollection services)

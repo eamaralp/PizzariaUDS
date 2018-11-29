@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PizzariaUDS.Repository
 {
-    public class SaborRepository
+    public class SaborRepository : ISaborRepository
     {
         private PizzariaContext _context;
 
@@ -30,13 +30,13 @@ namespace PizzariaUDS.Repository
             _context.SaveChanges();
         }
 
-        public IEnumerable<Sabor> ObterSabores()
+        public IEnumerable<ISaborProperties> ObterSabores()
         {
             var sabores = _context.Sabores.ToList();
             return sabores;
         }
 
-        public Sabor ObterSaborPorId(int idSabor)
+        public ISaborProperties ObterSaborPorId(int idSabor)
         {
             return _context.Sabores.FirstOrDefault(s => s.SaborId == idSabor);
         }

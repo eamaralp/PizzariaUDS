@@ -2,9 +2,9 @@
 
 namespace PizzariaUDS.Models
 {
-    public class Sabor : ItemPizza, ISaborProperties
+    public interface ITamanhoProperties : IItemPizzaProperties
     {
         [Key]
-        public int SaborId { get; set; }
+        int TamanhoId { get; set; }
     }
 }
