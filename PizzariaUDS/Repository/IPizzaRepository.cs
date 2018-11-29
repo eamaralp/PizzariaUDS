@@ -4,6 +4,6 @@ namespace PizzariaUDS.Repository
 {
     public interface IPizzaRepository
     {
-        Pizza SalvarPedido(Pizza pizza);
+        IPizzaProperties SalvarPizza(IPizzaProperties pizza);
     }
 }

@@ -12,9 +12,9 @@ namespace PizzariaUDS.Repository
             _context = context;
         }
 
-        public Pizza SalvarPedido(Pizza pizza)
+        public IPizzaProperties SalvarPizza(IPizzaProperties pizza)
         {
-            _context.Pizzas.Add(pizza);
+            _context.Pizzas.Add(pizza as Pizza);
             _context.SaveChanges();
 
             return pizza;

@@ -36,7 +36,7 @@ namespace PizzariaUDS.Business
                 Personalizacoes = presonalizacoes as IEnumerable<Personalizacao>
             };
 
-            _pizzaRepository.SalvarPedido(pizza);
+            _pizzaRepository.SalvarPizza(pizza);
 
             return pizza;
         }

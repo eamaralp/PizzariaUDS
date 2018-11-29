@@ -1,8 +1,12 @@
-﻿using NSubstitute;
+﻿using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 using PizzariaUDS.Business;
 using PizzariaUDS.Repository;
 using PizzariaUDSTests.Fakes.DTO;
+using PizzariaUDSTests.Fakes.Models;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace PizzariaUDSTests.Business
 {
@@ -26,7 +30,15 @@ namespace PizzariaUDSTests.Business
         [Test]
         public void Test1()
         {
-            new PizzaBusiness(_pizzaRepository, _saborRepository, _tamanhoRepository, _personalizacaoRepository).MontarPizza(PedidoDTOFake.Obter());
+            var esperado = PizzaFake.Obter();
+
+            _saborRepository.ObterSaborPorId(Arg.Any<int>()).Returns(SaborFake.Obter());
+            _tamanhoRepository.ObterTamanhoPorId(Arg.Any<int>()).Returns(TamanhoFake.Obter());
+            _personalizacaoRepository.ObterPersonalizacoesPorId(Arg.Any<IEnumerable<int>>()).Returns(PersonalizacaoFake.ObterLista());
+
+            var obtido = new PizzaBusiness(_pizzaRepository, _saborRepository, _tamanhoRepository, _personalizacaoRepository).MontarPizza(PedidoDTOFake.Obter());
+
+            esperado.Should().BeEquivalentTo(obtido);
         }
     }
 }
