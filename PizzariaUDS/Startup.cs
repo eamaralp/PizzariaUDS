@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PizzariaUDS.Business;
 using PizzariaUDS.Context;
 using PizzariaUDS.Exceptions;
+using PizzariaUDS.IoC;
 using PizzariaUDS.Repository;
 
 namespace PizzariaUDS
@@ -24,11 +24,7 @@ namespace PizzariaUDS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PizzariaContext>(options => options.UseInMemoryDatabase("InMemoryDatabase"));
-            services.AddScoped<SaborRepository>();
-            services.AddScoped<TamanhoRepository>();
-            services.AddScoped<PizzaRepository>();
-            services.AddScoped<PersonalizacaoRepository>();
-            services.AddScoped<PedidoPizzaBusiness>();
+            services.InjetarDependencias();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc(config =>

@@ -1,38 +1,52 @@
-﻿using PizzariaUDS.DTO;
+﻿using PizzariaUDS.Context;
+using PizzariaUDS.DTO;
 using PizzariaUDS.Models;
 using PizzariaUDS.Repository;
+using System;
 using System.Linq;
+using System.Transactions;
 
 namespace PizzariaUDS.Business
 {
     public class PedidoPizzaBusiness
     {
-        private PizzaRepository _pizzaRepository;
-        private SaborRepository _saborRepository;
-        private TamanhoRepository _tamanhoRepository;
-        private PersonalizacaoRepository _personalizacaoRepository;
+        private PedidoRepository _pedidoRepository;
+        private PizzaBusiness _pizzaBusiness;
+        private PizzariaContext _pizzariaContext;
 
-        public PedidoPizzaBusiness(PizzaRepository pizzaRepository,
-                                   SaborRepository saborRepository,
-                                   TamanhoRepository tamanhoRepository,
-                                   PersonalizacaoRepository personalizacaoRepository)
+        public PedidoPizzaBusiness(PedidoRepository pedidoRepository, PizzaBusiness pizzaBusiness, PizzariaContext pizzariaContext)
         {
-            _pizzaRepository = pizzaRepository;
-            _saborRepository = saborRepository;
-            _tamanhoRepository = tamanhoRepository;
-            _personalizacaoRepository = personalizacaoRepository;
+            _pedidoRepository = pedidoRepository;
+            _pizzaBusiness = pizzaBusiness;
+            _pizzariaContext = pizzariaContext;
         }
 
-        public DetalhesPedidoDTO MontarPedido(PedidoDTO pedidoDto)
+        public Pedido MontarPedido(PedidoDTO pedidoDto)
         {
             new ValidadorPedido().ValidarPedido(pedidoDto);
+
+            using (var scope = new TransactionScope())
+            {
+                try
+                {
+                    SalvarPedido(pedidoDto);
+
+                    scope.Complete();
+                }
+                catch (Exception exception)
+                {
+                    scope.Dispose();
+                    throw exception;
+                }
+            }
+
             var pedido = SalvarPedido(pedidoDto);
-            return new DetalhesPedidoDTO();
+            return pedido;
         }
 
         private Pedido SalvarPedido(PedidoDTO pedidoDto)
         {
-            var pizza = new PizzaBusiness().MontarPizza(pedidoDto);
+            var pizza = _pizzaBusiness.MontarPizza(pedidoDto);
 
             CalcularValorTotalPedido(pizza);
             CalcularTempoTotalProducao(pizza);
@@ -43,7 +57,10 @@ namespace PizzariaUDS.Business
                 ValorTotal = CalcularValorTotalPedido(pizza),
                 TempoDePreparo = CalcularTempoTotalProducao(pizza)
             };
-            return new Pedido();
+
+            _pedidoRepository.SalvarPedido(pedido);
+
+            return pedido;
         }
 
         private static decimal CalcularValorTotalPedido(Pizza pizza)
@@ -63,6 +80,5 @@ namespace PizzariaUDS.Business
 
             return tempoTotalProducao;
         }
-
     }
 }

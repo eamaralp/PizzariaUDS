@@ -11,11 +11,6 @@ namespace PizzariaUDS.Business
         private TamanhoRepository _tamanhoRepository;
         private PersonalizacaoRepository _personalizacaoRepository;
 
-        public PizzaBusiness()
-        {
-
-        }
-
         public PizzaBusiness(PizzaRepository pizzaRepository,
                              SaborRepository saborRepository,
                              TamanhoRepository tamanhoRepository,
