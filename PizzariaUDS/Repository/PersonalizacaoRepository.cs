@@ -38,6 +38,9 @@ namespace PizzariaUDS.Repository
 
         public IEnumerable<IPersonalizacaoProperties> ObterPersonalizacoesPorId(IEnumerable<int> idsPersinalizacoes)
         {
+            if (idsPersinalizacoes == null)
+                return null;
+
             var personalizacoes = _context.Personalizacoes.Where(p => idsPersinalizacoes.Contains(p.PersonalizacaoId)).ToList();
             return personalizacoes;
         }

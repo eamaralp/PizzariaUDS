@@ -1,5 +1,4 @@
-﻿using PizzariaUDS.Context;
-using PizzariaUDS.DTO;
+﻿using PizzariaUDS.DTO;
 using PizzariaUDS.Models;
 using PizzariaUDS.Repository;
 using System;
@@ -12,13 +11,11 @@ namespace PizzariaUDS.Business
     {
         private IPedidoRepository _pedidoRepository;
         private IPizzaBusiness _pizzaBusiness;
-        private IPizzariaContext _pizzariaContext;
 
-        public PedidoPizzaBusiness(IPedidoRepository pedidoRepository, IPizzaBusiness pizzaBusiness, IPizzariaContext pizzariaContext)
+        public PedidoPizzaBusiness(IPedidoRepository pedidoRepository, IPizzaBusiness pizzaBusiness)
         {
             _pedidoRepository = pedidoRepository;
             _pizzaBusiness = pizzaBusiness;
-            _pizzariaContext = pizzariaContext;
         }
 
         public Pedido MontarPedido(PedidoDTO pedidoDto)
@@ -66,7 +63,7 @@ namespace PizzariaUDS.Business
         {
             var valorTotal = pizza.Sabor.Valor.GetValueOrDefault()
                            + pizza.Tamanho.Valor.GetValueOrDefault()
-                           + pizza.Personalizacoes.Sum(x => x.Valor.GetValueOrDefault());
+                           + Convert.ToDecimal(pizza.Personalizacoes?.Sum(x => x.Valor.GetValueOrDefault()));
 
             return valorTotal;
         }
@@ -75,7 +72,7 @@ namespace PizzariaUDS.Business
         {
             var tempoTotalProducao = pizza.Sabor.MinutosParaProduzir.GetValueOrDefault()
                                    + pizza.Tamanho.MinutosParaProduzir.GetValueOrDefault()
-                                   + pizza.Personalizacoes.Sum(x => x.MinutosParaProduzir.GetValueOrDefault());
+                                   + Convert.ToInt16(pizza.Personalizacoes?.Sum(x => x.MinutosParaProduzir.GetValueOrDefault()));
 
             return tempoTotalProducao;
         }
