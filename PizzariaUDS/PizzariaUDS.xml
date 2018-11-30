@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PizzariaUDS</name>
+    </assembly>
+    <members>
+        <member name="M:PizzariaUDS.Controllers.PedidoController.MontarPedido(PizzariaUDS.DTO.PedidoDTO)">
+            <summary>
+            Recebe um DTO para gravar um novo pedido no sistema., será necessário informar
+            o código identificador do tamanho, sabor e opcionalmente uma lista de identificadores
+            para as personalizações.
+            </summary>
+            <returns>Objeto Pedido, contendo todas as informações vinculadas ao pedido</returns>
+        </member>
+        <member name="M:PizzariaUDS.Controllers.PizzaController.ObterTamanhos">
+            <summary>
+            Obtem a lista de todos os tamanhos de pizza cadastrados no sistema.
+            </summary>
+            <returns>Lista de objetos contento os tamanhos de pizza com as propriedades
+            [Descrição, MinutosParaProduzir, Valor e TamanhoId.</returns>
+        </member>
+        <member name="M:PizzariaUDS.Controllers.PizzaController.ObterSabores">
+            <summary>
+            Obtem a lista de todos os sabores de pizza cadastrados no sistema.
+            </summary>
+            <returns>Lista de objetos contento os sabores de pizza com as propriedades
+            [Descrição, MinutosParaProduzir, Valor e TSaborId.</returns>
+        </member>
+        <member name="M:PizzariaUDS.Controllers.PizzaController.ObterPersonalizacoes">
+            <summary>
+            Obtem a lista de todas as personalizações de pizza cadastradas no sistema.
+            </summary>
+            <returns>Lista de objetos contento as personalizações de pizza com as propriedades
+            [Descrição, MinutosParaProduzir, Valor e PersonalizacaoId.</returns>
+        </member>
+    </members>
+</doc>
