@@ -7,7 +7,7 @@ namespace PizzariaUDS.Repository
 {
     public class SaborRepository : ISaborRepository
     {
-        private IPizzariaContext _context;
+        private readonly IPizzariaContext _context;
 
         public SaborRepository(IPizzariaContext context)
         {

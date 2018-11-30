@@ -9,8 +9,8 @@ namespace PizzariaUDS.Business
 {
     public class PedidoPizzaBusiness : IPedidoPizzaBusiness
     {
-        private IPedidoRepository _pedidoRepository;
-        private IPizzaBusiness _pizzaBusiness;
+        private readonly IPedidoRepository _pedidoRepository;
+        private readonly IPizzaBusiness _pizzaBusiness;
 
         public PedidoPizzaBusiness(IPedidoRepository pedidoRepository, IPizzaBusiness pizzaBusiness)
         {
@@ -26,9 +26,7 @@ namespace PizzariaUDS.Business
             {
                 try
                 {
-                    SalvarPedido(pedidoDto);
-
-                    scope.Complete();
+                    return SalvarPedido(pedidoDto); 
                 }
                 catch (Exception exception)
                 {
@@ -36,8 +34,6 @@ namespace PizzariaUDS.Business
                     throw exception;
                 }
             }
-
-            return SalvarPedido(pedidoDto);
         }
 
         private Pedido SalvarPedido(PedidoDTO pedidoDto)

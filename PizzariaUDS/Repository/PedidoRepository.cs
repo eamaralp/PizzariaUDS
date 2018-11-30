@@ -5,7 +5,7 @@ namespace PizzariaUDS.Repository
 {
     public class PedidoRepository : IPedidoRepository
     {
-        private IPizzariaContext _context;
+        private readonly IPizzariaContext _context;
 
         public PedidoRepository(IPizzariaContext context)
         {

@@ -13,5 +13,14 @@ namespace PizzariaUDSTests.Fakes.Models
                 Personalizacoes = PersonalizacaoFake.ObterLista()
             };
         }
+
+        public static Pizza ObterSemPersonalizacoes()
+        {
+            return new Pizza()
+            {
+                Tamanho = TamanhoFake.Obter(),
+                Sabor = SaborFake.Obter()
+            };
+        }
     }
 }

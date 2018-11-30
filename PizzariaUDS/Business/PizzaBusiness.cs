@@ -7,10 +7,10 @@ namespace PizzariaUDS.Business
 {
     public class PizzaBusiness : IPizzaBusiness
     {
-        private IPizzaRepository _pizzaRepository;
-        private ISaborRepository _saborRepository;
-        private ITamanhoRepository _tamanhoRepository;
-        private IPersonalizacaoRepository _personalizacaoRepository;
+        private readonly IPizzaRepository _pizzaRepository;
+        private readonly ISaborRepository _saborRepository;
+        private readonly ITamanhoRepository _tamanhoRepository;
+        private readonly IPersonalizacaoRepository _personalizacaoRepository;
 
         public PizzaBusiness(IPizzaRepository pizzaRepository,
                              ISaborRepository saborRepository,
